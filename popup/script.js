@@ -60,70 +60,10 @@ $(function () {
     })();
   }
 
-  function ajouterIsIndexed() {
-    $('#chargement').show();
+  function ajouterIsIndexed() {    
     chrome.storage.sync.get(['key'], function (result) {
-      console.log('Value currently is ' + result.key);
-      recupererLien();
-      // urls: [
-      //   "www.jouve.com",
-      //   "www.google.mg",
-      // ]
-
-      //Post
-      if (abc.length > 0 && abc[0].length > 0) {
-        var tab_urls = [];
-        for (var index = 0; index < abc[0].length; index++) {
-          tab_urls.push(abc[0][index]);
-        }
-        var dataSend = {
-          project_name: datenow(),
-          urls: tab_urls
-        };
-        var dataObj = {
-          url: 'https://tool.isindexed.com/api/v1/project/add',
-          authorization: result.key,
-          data: JSON.stringify(dataSend)
-        }
-        // console.log(dataObj);
-        // exit();
-        $.ajax({
-          url: "https://captureserp.com/isindexed/action.php",
-          type: "POST",
-          dataType: "json",
-          data: $.param(dataObj),
-          success: function (data) {
-            // var json = $.parseJSON(data);
-            // console.log(json);            
-            try {
-              var json = JSON.parse(data);
-              console.log(json);
-              $('#isindexed_ajouter').val(json.id);
-
-              //Pour la partie voir à supprimer une fois terminer
-              $('#isindexed_voir').val(json.id);
-              //Actualiser l'affichage crédit              
-              voirCredit();
-            } catch (e) {
-              // //Refaire après 5 seconds
-              // setTimeout(function () {
-              //   ajouterIsIndexed();
-              // }, 5000);
-              alert("Le serveur est saturé. Veuillez réessayer après 10s!");
-              $('#chargement').hide();
-            }
-
-          },
-          error: function () {
-            //alert("Cannot get data");
-          }
-        });
-      } else {
-        //Si les urls ne sont pas encore récupérer. Alors, il faut refaire l'appel après 5 seconds.
-        setTimeout(function () {
-          ajouterIsIndexed();
-        }, 5000);
-      }
+      
+      AjouterInjecterLaReponseDom(result.key)
     });
   }
   $(document).on("click", "#ajouter", function () {
@@ -175,7 +115,23 @@ $(function () {
   $(document).on("click", "#voir", function () {
     voirIsIndexed();
   });
+  function AjouterInjecterLaReponseDom(tokken) {
+    (async () => {
 
+      chrome.tabs.query({ active: true }, function (tabs) {
+        var tab = tabs[0];
+
+        var config = { tokken: tokken};
+        chrome.tabs.executeScript(tab.id, {
+          code: 'var config = ' + JSON.stringify(config)
+        }, function () {
+          chrome.tabs.executeScript(tab.id, { file: 'jquery.min.js' });
+          chrome.tabs.executeScript(tab.id, { file: "ajouter.js" });    
+        });
+      });
+
+    })();
+  }
   function injecterLaReponseDom(tokken, json) {
     (async () => {
 
