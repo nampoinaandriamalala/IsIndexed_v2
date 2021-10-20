@@ -11,7 +11,7 @@ $(function () {
         'background-color': '#4f81bd'
     });
 
-    console.log(config);
+    //console.log(config);
 
 
     //Début fonction
@@ -82,7 +82,7 @@ $(function () {
                     // console.log(json);            
                     try {
                         var json = JSON.parse(data);
-                        console.log(json);
+                        //console.log(json);
 
                         //Affichage des données
                         collecteIsIndexed(json.id, config.tokken);
@@ -147,7 +147,7 @@ $(function () {
                 //console.log(data);
                 try {
                     var json = JSON.parse(data);
-                    console.log(json);
+                    //console.log(json);
                     if ($('#isindexed-div').length) {
                         $('#isindexed-div').remove();
                     }
@@ -185,7 +185,7 @@ $(function () {
         }
 
 
-        console.log(json);
+        //console.log(json);
         //Tableau réponse
         var tab_reponse = json.urls;
         //DOM sur le site
@@ -208,14 +208,14 @@ $(function () {
 
                     tab_link.push(liens[0].href);
                     var lien_dom = liens[0].href;
-                    console.log(lien_dom);
+                    //console.log(lien_dom);
 
 
                     for (var a = 0; a < tab_reponse.length; a++) {
                         var lien_reponse = tab_reponse[a].url;
                         if (lien_dom.toLowerCase() == lien_reponse.toLowerCase().replaceAll('&amp;', '&')) {
                             //Ajout de l'indication
-                            console.log(tab_reponse[a]);
+                            //console.log(tab_reponse[a]);
                             if (tab_reponse[a] != undefined) {
                                 var linkType = null;
                                 if (textCell.getElementsByClassName('linkType').length > 0) {
