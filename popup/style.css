@@ -1,0 +1,53 @@
+.bordure {
+    width: 300px;
+    height: 200px;
+}
+
+.contenu {
+    border-bottom: 1px solid #9e9e9e;
+    background-color: #d0d3d8;
+    text-align: center;
+    /*font-weight: bold;*/
+    padding: 10px 0px 10px 0px;
+    width: 316px;
+    margin-left: -8px;
+    margin-top: -8px;
+    font-size: 16px;
+}
+
+.espace-token {
+    display: flex;
+    margin-top: 10px;
+}
+.label-token {
+    padding-right: 5px;
+    font-size: 15px;
+}
+
+#isindexed_token {
+    border: 1px solid #9e9e9eba;
+    width: 100%;
+    height: 17px;
+    font-size: 12px;
+    color: #686a89;
+}
+
+.label-btn {
+    margin-left: 10px;
+}
+
+.espace-chargement {
+    display: block;
+    position: fixed;
+    height: 135px;
+    text-align: center;
+    width: 100%;
+    top: 40px;
+    left: 0px;
+    padding-top: 33px;
+    background-color: #75798182;
+}
+
+img.image-chargement {
+    width: 30%;
+}

@@ -1,0 +1,25 @@
+div#isindexed-div {
+    margin-left: 20px;
+    font-size: 20px;
+    padding: 10px;
+    color: white;
+  }
+
+  .indexe-vert {
+    background: #7ace62 !important;
+    color: #1c3b51 !important;
+    font-weight: bold;
+}
+
+
+.indexe-rouge {
+  background: #f13a0c !important;
+  color: #f7fafc !important;
+  font-weight: bold;
+}
+
+.indexe-blanc {
+  background: #fdfdfd !important;
+  color: #1494e9 !important;
+  font-weight: bold;
+}
