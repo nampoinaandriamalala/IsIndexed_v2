@@ -62,7 +62,7 @@ $(function () {
                 tab_urls.push(tab_link[index]);
             }
             var dataSend = {
-                project_name: window.location.host +" "+$('#search_text').val()+" "+datenow(),
+                project_name: window.location.host + " | " + $('#search_text').val() + " | " + datenow(),
                 urls: tab_urls
             };
             var dataObj = {
@@ -178,6 +178,15 @@ $(function () {
         });
     }
 
+    function supprimerElementsByClass(elementRecherche,classeasupprimer)
+    {
+        //console.log('ici');
+        var col_wrapper = elementRecherche.getElementsByClassName(classeasupprimer);
+        var len = col_wrapper.length;                                        
+        for (var i = 0; i < len; i++) {                                
+                col_wrapper[i].remove();                                            
+        }
+    }
     function restructurationDuDom(json, id_projet, tokken) {
         //Supprimer div s'il existe
         if ($('#isindexed-div').length) {
@@ -229,31 +238,34 @@ $(function () {
 
                                         default:
                                             linkType = textCell.getElementsByClassName('linkType')[1];
-                                            if(textCell.getElementsByClassName('linkType').length >= 3)
-                                            {
-                                                for (var c = 2; index < textCell.getElementsByClassName('linkType').length; index++) {
-                                                    //Effacer le contenu des autres
-                                                    textCell.getElementsByClassName('linkType')[c].innerHTML = "";                                                  
-                                                }
-                                            }
+                                            // if(textCell.getElementsByClassName('linkType').length >= 3)
+                                            // {
+                                            //     for (var c = 2; index < textCell.getElementsByClassName('linkType').length; index++) {
+                                            //         //Effacer le contenu des autres
+                                            //         textCell.getElementsByClassName('linkType')[c].innerHTML = "";                                                  
+                                            //     }
+                                            // }
                                             break;
                                     }
                                 }
 
                                 //Effacer le contenu
-                                linkType.innerHTML = "";
+                                //linkType.innerHTML = "";
 
                                 switch (tab_reponse[a].status) {
                                     case "0":
-                                        linkType.insertAdjacentHTML('beforeend', '<span class="indexe-supprimer indexe-blanc link-type-button">En attente</span>');
+                                        supprimerElementsByClass(linkType,'indexe-supprimer');
+                                        linkType.innerHTML += '<span class="indexe-supprimer indexe-blanc link-type-button">En attente</span>';
                                         pasFini = true;
                                         break;
                                     case "1":
-                                        linkType.insertAdjacentHTML('beforeend', '<span class="indexe-supprimer indexe-vert link-type-button">Indexé</span>');
+                                        supprimerElementsByClass(linkType,'indexe-supprimer');
+                                        linkType.innerHTML += '<span class="indexe-supprimer indexe-vert link-type-button">Indexé</span>';
                                         total_fini++;
                                         break;
                                     case "2":
-                                        linkType.insertAdjacentHTML('beforeend', '<span class="indexe-supprimer indexe-rouge link-type-button">Non indexé</span>');
+                                        supprimerElementsByClass(linkType,'indexe-supprimer');
+                                        linkType.innerHTML += '<span class="indexe-supprimer indexe-rouge link-type-button">Non indexé</span>';
                                         total_fini++;
                                         break;
                                     default:
@@ -261,11 +273,12 @@ $(function () {
                                 }
 
                             } else {
+                                supprimerElementsByClass(linkType,'indexe-supprimer');
                                 var linkType = textCell.getElementsByClassName('linkType')[1];
 
                                 //Effacer le contenu
-                                linkType.innerHTML = "";
-                                linkType.insertAdjacentHTML('beforeend', '<span class="indexe-supprimer indexe-blanc link-type-button">Pas disponnible</span>');
+                                //linkType.innerHTML = "";
+                                linkType.innerHTML +='<span class="indexe-supprimer indexe-blanc link-type-button">Pas disponnible</span>';
                             }
                         }
                     }
