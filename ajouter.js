@@ -62,7 +62,7 @@ $(function () {
                 tab_urls.push(tab_link[index]);
             }
             var dataSend = {
-                project_name: datenow(),
+                project_name: window.location.host +" "+$('#search_text').val()+" "+datenow(),
                 urls: tab_urls
             };
             var dataObj = {
