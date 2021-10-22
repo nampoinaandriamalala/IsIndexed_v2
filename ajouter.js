@@ -224,7 +224,7 @@ $(function () {
                         var lien_reponse = tab_reponse[a].url;
                         if (lien_dom.toLowerCase() == lien_reponse.toLowerCase().replaceAll('&amp;', '&')) {
                             //Ajout de l'indication
-                            //console.log(tab_reponse[a]);
+                            //gitconsole.log(tab_reponse[a]);
                             if (tab_reponse[a] != undefined) {
                                 var linkType = null;
                                 if (textCell.getElementsByClassName('linkType').length > 0) {
