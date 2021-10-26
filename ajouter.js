@@ -1,5 +1,8 @@
 $(function () {
 
+    var total = 0;
+    var total_indexe = 0;
+    var total_non_indexe = 0;
     //Supprimer div s'il existe
     if ($('#isindexed-div').length) {
         $('#isindexed-div').remove();
@@ -52,7 +55,7 @@ $(function () {
         if (tab_link.length > 0) {
             //Indication
             $('div#isindexed-div').remove();
-            $("<div id='isindexed-div'>Envoie des urls... </div>").insertBefore("#js-main-table");
+            $("<div id='isindexed-div'><p>Envoie des urls (backlinks) pour vérification</p><p>des indexations sur isindexed.com</p></div>").insertBefore("#js-main-table");
             $('div#isindexed-div').css({
                 'background-color': '#fc0'
             });
@@ -62,7 +65,7 @@ $(function () {
                 tab_urls.push(tab_link[index]);
             }
             var dataSend = {
-                project_name: window.location.host + " | " + $('#search_text').val() + " | " + datenow(),
+                project_name: window.location.host + " - " + $('#search_text').val() + " - " + datenow(),
                 urls: tab_urls
             };
             var dataObj = {
@@ -89,7 +92,7 @@ $(function () {
                     } catch (e) {
                         //Indication
                         $('div#isindexed-div').remove();
-                        $("<div id='isindexed-div'>En attente du serveur. Nouvelle tentative après 5s!</div>").insertBefore("#js-main-table");
+                        $("<div id='isindexed-div'><p>En attente de la fin du projet sur isindexed.com. </p><p>Nouvelle tentative de récupération des résutats dans 5s!</p></div>").insertBefore("#js-main-table");
                         $('div#isindexed-div').css({
                             'background-color': '#c82e2e'
                         });
@@ -159,7 +162,7 @@ $(function () {
                     //Refaire après 5 seconds
                     //Indication
                     $('div#isindexed-div').remove();
-                    $("<div id='isindexed-div'>En attente du serveur. Nouvelle tentative après 5s!</div>").insertBefore("#js-main-table");
+                    $("<div id='isindexed-div'><p>En attente de la fin du projet sur isindexed.com. </p><p>Nouvelle tentative de récupération des résutats dans 5s!</p></div>").insertBefore("#js-main-table");
                     $('div#isindexed-div').css({
                         'background-color': '#c82e2e'
                     });
@@ -203,8 +206,12 @@ $(function () {
         var tr = vue_backlinks_table.getElementsByTagName('tr');
 
         var pasFini = false;    //Si c'est pas encore fini alors faire une requête après 5s
-        var total = tab_reponse.length;
+        total = tab_reponse.length;
         var total_fini = 0;
+
+
+        total_indexe = 0;
+        total_non_indexe = 0;
 
         //console.log(tr);
         for (let index = 2; index < tr.length; index++) {
@@ -262,11 +269,13 @@ $(function () {
                                         supprimerElementsByClass(linkType,'indexe-supprimer');
                                         linkType.innerHTML += '<span class="indexe-supprimer indexe-vert link-type-button">Indexé</span>';
                                         total_fini++;
+                                        total_indexe++;
                                         break;
                                     case "2":
                                         supprimerElementsByClass(linkType,'indexe-supprimer');
                                         linkType.innerHTML += '<span class="indexe-supprimer indexe-rouge link-type-button">Non indexé</span>';
                                         total_fini++;
+                                        total_non_indexe++;
                                         break;
                                     default:
                                         break;
@@ -302,7 +311,7 @@ $(function () {
         } else {
             //Indication
             $('div#isindexed-div').remove();
-            $("<div id='isindexed-div'>Toute la liste a été vérifiée!</div>").insertBefore("#js-main-table");
+            $("<div id='isindexed-div'><p>Toute la liste a été vérifiée!</p><p>Nombre total de backlinks testés : "+total+"</p><p>Nombre total de backlinks indexés : "+total_indexe+"</p><p>Nombre total de backlinks non indexé : "+total_non_indexe+"</p></div>").insertBefore("#js-main-table");
             $('div#isindexed-div').css({
                 'background-color': '#29b0039e'
             });
