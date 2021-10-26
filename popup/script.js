@@ -60,14 +60,37 @@ $(function () {
     })();
   }
 
-  function ajouterIsIndexed() {    
+  function ajouterIsIndexed() {
     chrome.storage.sync.get(['key'], function (result) {
-      
+
       AjouterInjecterLaReponseDom(result.key)
     });
   }
   $(document).on("click", "#ajouter", function () {
-    ajouterIsIndexed();
+    chrome.tabs.query({ active: true, currentWindow: true }, function (tabs) {
+      var tab = tabs[0];
+      var url = new URL(tab.url)
+      var domain = url.hostname
+      // `domain` now has a value like 'example.com'
+
+      var tab_url_accepte = ["majestic.com", "ahref.com", "babbar.tech"];
+      var test_url = false;
+      for (var index = 0; index < tab_url_accepte.length; index++) {
+        if (domain.includes(tab_url_accepte[index])) {
+          test_url = true;
+        }
+      }
+      if (test_url == true) {
+        //faire
+        ajouterIsIndexed();
+      } else {
+        alert("Vous devez vous rendre sur la page qui liste les backlinks de majesticseo.com, ahref.com ou babbar.tech.");
+      }
+
+      console.log(domain);
+    })
+
+
   });
 
   function voirIsIndexed() {
@@ -121,12 +144,12 @@ $(function () {
       chrome.tabs.query({ active: true }, function (tabs) {
         var tab = tabs[0];
 
-        var config = { tokken: tokken};
+        var config = { tokken: tokken };
         chrome.tabs.executeScript(tab.id, {
           code: 'var config = ' + JSON.stringify(config)
         }, function () {
           chrome.tabs.executeScript(tab.id, { file: 'jquery.min.js' });
-          chrome.tabs.executeScript(tab.id, { file: "ajouter.js" });    
+          chrome.tabs.executeScript(tab.id, { file: "ajouter.js" });
         });
       });
 
@@ -143,7 +166,7 @@ $(function () {
           code: 'var config = ' + JSON.stringify(config)
         }, function () {
           chrome.tabs.executeScript(tab.id, { file: 'jquery.min.js' });
-          chrome.tabs.executeScript(tab.id, { file: "content.js" });    
+          chrome.tabs.executeScript(tab.id, { file: "content.js" });
         });
       });
 
@@ -174,7 +197,7 @@ $(function () {
             try {
               var json = JSON.parse(data);
               console.log(json);
-              $('#isindexed_credit').text(json.credits);
+              $('#isindexed_credit').text(numStr(json.credits));
               $('#chargement').hide();
             } catch (e) {
               //Refaire après 5 seconds
@@ -209,6 +232,21 @@ $(function () {
     var date = new Date();
     var sortie = date.getFullYear().toString() + pad2(date.getMonth() + 1) + pad2(date.getDate()) + pad2(date.getHours()) + pad2(date.getMinutes()) + pad2(date.getSeconds());
     return sortie;
+  }
+
+  function numStr(a, b) {
+    a = '' + a;
+    b = b || ' ';
+    var c = '',
+        d = 0;
+    while (a.match(/^0[0-9]/)) {
+      a = a.substr(1);
+    }
+    for (var i = a.length-1; i >= 0; i--) {
+      c = (d != 0 && d % 3 == 0) ? a[i] + b + c : a[i] + c;
+      d++;
+    }
+    return c;
   }
 
 
