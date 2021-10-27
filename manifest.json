@@ -24,7 +24,7 @@
 
     "content_scripts": [ {
         "matches": ["*://*.majestic.com/reports/site-explorer/top-backlinks*"],
-        "js": ["jquery.min.js","envoyer.js"],
+        "js": ["js.cookie.js","jquery.min.js","envoyer.js"],
         "css": ["envoyer.css","content.css"]
     } ]
 }

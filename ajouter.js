@@ -213,6 +213,7 @@ $(function () {
         total_indexe = 0;
         total_non_indexe = 0;
 
+        var tab_co = [] ;
         //console.log(tr);
         for (let index = 2; index < tr.length; index++) {
             const element = tr[index];
@@ -254,6 +255,7 @@ $(function () {
                                             // }
                                             break;
                                     }
+                                    
                                 }
 
                                 //Effacer le contenu
@@ -280,7 +282,7 @@ $(function () {
                                     default:
                                         break;
                                 }
-
+                                tab_co.push({u:index,s:tab_reponse[a].status});
                             } else {
                                 supprimerElementsByClass(linkType,'indexe-supprimer');
                                 var linkType = textCell.getElementsByClassName('linkType')[1];
@@ -295,6 +297,7 @@ $(function () {
             }
         }
         if (pasFini == true) {
+            //Cookies.set('nampoina', 'miora');
             //Si c'est pas encore fini alors il faut revoir la liste
             //Indication
             $('div#isindexed-div').remove();
@@ -315,6 +318,13 @@ $(function () {
             $('div#isindexed-div').css({
                 'background-color': '#29b0039e'
             });
+
+            //console.log('ici');
+
+            //Enregistrement du coockies         
+            var url_rechercher = $('#search_text').val();
+            var to_store = JSON.stringify(tab_co);
+            Cookies.set(url_rechercher, to_store);
         }
     }
     ajoutDesUrls(tab_link);

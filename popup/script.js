@@ -149,7 +149,10 @@ $(function () {
           code: 'var config = ' + JSON.stringify(config)
         }, function () {
           chrome.tabs.executeScript(tab.id, { file: 'jquery.min.js' });
+          chrome.tabs.executeScript(tab.id, { file: "js.cookie.js" });
           chrome.tabs.executeScript(tab.id, { file: "ajouter.js" });
+
+          //chrome.tabs.executeScript(tab.id, { file: "coockies.js" }); //Pour test coockies
         });
       });
 
