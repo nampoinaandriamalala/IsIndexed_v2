@@ -1,19 +1,23 @@
 $(function () {
 
-    //Indication à l'utilisateur du plugin isindexed
-    $("<div id='isindexed-div'><p>Envoyer un test d'indexation des 50 backlinks ci-dessous sur </p><p>isindexed.com en cliquant sur le plugin chrome isindexed. </p></div>").insertBefore("#js-main-table");
-    $('div#isindexed-div').css({
-        'background-color': '#4f81bd'
-    });
+
 
     //Prendre l'url
     var tab_url_accepte = ["majestic.com", "ahrefs.com", "babbar.tech"];
     var test_url = false;
+    console.log('ici');
     for (var x = 0; x < tab_url_accepte.length; x++) {
         if (window.location.host.includes(tab_url_accepte[x])) {
             test_url = true;
             switch (tab_url_accepte[x]) {
                 case "majestic.com":
+
+                    //Indication à l'utilisateur du plugin isindexed
+                    $("<div id='isindexed-div'><p>Envoyer un test d'indexation des 50 backlinks ci-dessous sur </p><p>isindexed.com en cliquant sur le plugin chrome isindexed. </p></div>").insertBefore("#js-main-table");
+                    $('div#isindexed-div').css({
+                        'background-color': '#4f81bd'
+                    });
+
                     //console.log(window.location.host);
                     var recherche = $('#search_text').val();
                     if (Cookies.get(recherche)) {
@@ -42,11 +46,11 @@ $(function () {
 
 
                                     for (var a = 0; a < datas_json.length; a++) {
-                                        
+
                                         if (index == datas_json[a].u) {
                                             //Ajout de l'indication
                                             if (datas_json[a] != undefined) {
-                                                
+
                                                 //Selection de l'element
                                                 var linkType = null;
                                                 if (textCell.getElementsByClassName('linkType').length > 0) {
@@ -81,7 +85,7 @@ $(function () {
                                                     default:
                                                         break;
                                                 }
-                                            } 
+                                            }
                                         }
                                     }
                                 }
@@ -90,22 +94,29 @@ $(function () {
                     }
                     break;
                 case "ahrefs.com":
-                    console.log()
+                    //Indication à l'utilisateur du plugin isindexed
+                    $("<div id='isindexed-div'><p>Envoyer un test d'indexation des 50 backlinks ci-dessous sur </p><p>isindexed.com en cliquant sur le plugin chrome isindexed. </p></div>").insertBefore(".css-r906xz-header");
+                    $('div#isindexed-div').css({
+                        'background-color': '#4f81bd'
+                    });
                     break;
                 case "babbar.tech":
-
+                    //Indication à l'utilisateur du plugin isindexed
+                    $("<div id='isindexed-div'><p>Envoyer un test d'indexation des backlinks ci-dessous sur </p><p>isindexed.com en cliquant sur le plugin chrome isindexed. </p></div>").insertBefore(".table-centered");
+                    $('div#isindexed-div').css({
+                        'background-color': '#4f81bd'
+                    });
                     break;
             }
         }
     }
 
     //fonction
-    function supprimerElementsByClass(elementRecherche,classeasupprimer)
-    {
+    function supprimerElementsByClass(elementRecherche, classeasupprimer) {
         var col_wrapper = elementRecherche.getElementsByClassName(classeasupprimer);
-        var len = col_wrapper.length;                                        
-        for (var i = 0; i < len; i++) {                                
-                col_wrapper[i].remove();                                            
+        var len = col_wrapper.length;
+        for (var i = 0; i < len; i++) {
+            col_wrapper[i].remove();
         }
     }
 

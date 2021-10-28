@@ -23,7 +23,7 @@
     },
 
     "content_scripts": [ {
-        "matches": ["*://*.majestic.com/reports/site-explorer/top-backlinks*"],
+        "matches": ["*://*.majestic.com/reports/site-explorer/top-backlinks*","https://www.babbar.tech/url/backlinks/url*"],
         "js": ["js.cookie.js","jquery.min.js","envoyer.js"],
         "css": ["envoyer.css","content.css"]
     } ]
