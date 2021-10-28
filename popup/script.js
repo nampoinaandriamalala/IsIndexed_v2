@@ -70,21 +70,34 @@ $(function () {
     chrome.tabs.query({ active: true, currentWindow: true }, function (tabs) {
       var tab = tabs[0];
       var url = new URL(tab.url)
-      var domain = url.hostname
+      var domain = url.hostname;
       // `domain` now has a value like 'example.com'
 
-      var tab_url_accepte = ["majestic.com", "ahref.com", "babbar.tech"];
+      var tab_url_accepte = ["majestic.com", "ahrefs.com", "babbar.tech"];
       var test_url = false;
+      var index_tab_url = 0;
       for (var index = 0; index < tab_url_accepte.length; index++) {
         if (domain.includes(tab_url_accepte[index])) {
           test_url = true;
+          index_tab_url = index;
         }
       }
       if (test_url == true) {
         //faire
-        ajouterIsIndexed();
+        switch (tab_url_accepte[index_tab_url]) {
+          case "majestic.com":
+            ajouterIsIndexed();
+            break;
+          case "ahrefs.com":
+            alert("c'est pas encore fini");
+            break;
+          case "babbar.tech":
+            alert("c'est pas encore fini");
+            break;
+        }
+
       } else {
-        alert("Vous devez vous rendre sur la page qui liste les backlinks de majesticseo.com, ahref.com ou babbar.tech.");
+        alert("Vous devez vous rendre sur la page qui liste les backlinks de majesticseo.com, ahrefs.com ou babbar.tech.");
       }
 
       console.log(domain);
@@ -241,11 +254,11 @@ $(function () {
     a = '' + a;
     b = b || ' ';
     var c = '',
-        d = 0;
+      d = 0;
     while (a.match(/^0[0-9]/)) {
       a = a.substr(1);
     }
-    for (var i = a.length-1; i >= 0; i--) {
+    for (var i = a.length - 1; i >= 0; i--) {
       c = (d != 0 && d % 3 == 0) ? a[i] + b + c : a[i] + c;
       d++;
     }

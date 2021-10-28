@@ -7,18 +7,18 @@ $(function () {
     });
 
     //Prendre l'url
-    var tab_url_accepte = ["majestic.com", "ahref.com", "babbar.tech"];
+    var tab_url_accepte = ["majestic.com", "ahrefs.com", "babbar.tech"];
     var test_url = false;
     for (var x = 0; x < tab_url_accepte.length; x++) {
         if (window.location.host.includes(tab_url_accepte[x])) {
             test_url = true;
             switch (tab_url_accepte[x]) {
                 case "majestic.com":
-                    console.log(window.location.host);
+                    //console.log(window.location.host);
                     var recherche = $('#search_text').val();
                     if (Cookies.get(recherche)) {
                         var datas_json = JSON.parse(Cookies.get(recherche));
-                        console.log(datas_json);
+                        //console.log(datas_json);
 
 
                         //Réaffichage selon cookie
@@ -89,8 +89,8 @@ $(function () {
                         }
                     }
                     break;
-                case "ahref.com":
-
+                case "ahrefs.com":
+                    console.log()
                     break;
                 case "babbar.tech":
 
