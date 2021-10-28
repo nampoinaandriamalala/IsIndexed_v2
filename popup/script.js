@@ -66,6 +66,14 @@ $(function () {
       AjouterInjecterLaReponseDom(result.key)
     });
   }
+
+  function ajouterIsIndexedBabbar() {
+    chrome.storage.sync.get(['key'], function (result) {
+
+      AjouterInjecterLaReponseDomBabbar(result.key)
+    });
+  }
+
   $(document).on("click", "#ajouter", function () {
     chrome.tabs.query({ active: true, currentWindow: true }, function (tabs) {
       var tab = tabs[0];
@@ -92,7 +100,8 @@ $(function () {
             alert("c'est pas encore fini");
             break;
           case "babbar.tech":
-            alert("c'est pas encore fini");
+            //alert("c'est pas encore fini");
+            ajouterIsIndexedBabbar();
             break;
         }
 
@@ -171,6 +180,28 @@ $(function () {
 
     })();
   }
+
+  function AjouterInjecterLaReponseDomBabbar(tokken) {
+    (async () => {
+
+      chrome.tabs.query({ active: true }, function (tabs) {
+        var tab = tabs[0];
+
+        var config = { tokken: tokken };
+        chrome.tabs.executeScript(tab.id, {
+          code: 'var config = ' + JSON.stringify(config)
+        }, function () {
+          chrome.tabs.executeScript(tab.id, { file: 'jquery.min.js' });
+          chrome.tabs.executeScript(tab.id, { file: "js.cookie.js" });
+          chrome.tabs.executeScript(tab.id, { file: "ajouterbabbar.js" });
+
+          //chrome.tabs.executeScript(tab.id, { file: "coockies.js" }); //Pour test coockies
+        });
+      });
+
+    })();
+  }
+
   function injecterLaReponseDom(tokken, json) {
     (async () => {
 

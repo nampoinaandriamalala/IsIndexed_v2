@@ -5,7 +5,7 @@ $(function () {
     //Prendre l'url
     var tab_url_accepte = ["majestic.com", "ahrefs.com", "babbar.tech"];
     var test_url = false;
-    console.log('ici');
+    //console.log('ici');
     for (var x = 0; x < tab_url_accepte.length; x++) {
         if (window.location.host.includes(tab_url_accepte[x])) {
             test_url = true;
