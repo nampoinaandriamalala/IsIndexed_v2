@@ -204,7 +204,7 @@ $(function () {
         var tab_link = [];
         var tr = $('#dataTable tr');
 
-        console.log(tr);
+        //console.log(tr);
         // for (let index = 0; index < tr.length; index++) {
         //     const element = tr[index];
 
@@ -264,22 +264,30 @@ $(function () {
 
                                 switch (tab_reponse[a].status) {
                                     case "0":
-                                        supprimerElementsByClass(linkType, 'indexe-supprimer');
+                                        supprimerElementsByClass(textCell, 'indexe-supprimer');
                                         //linkType.innerHTML += '<span class="indexe-supprimer indexe-blanc link-type-button">En attente</span>';
-                                        $('<span class="indexe-supprimer indexe-blanc link-type-button">En attente</span>').before(linkType);
+                                        //textCell.innerHTML
+                                        //$('<span class="indexe-supprimer indexe-blanc link-type-button">En attente</span>').before(linkType);
+                                        //linkType.prepend("<span class=\"indexe-supprimer indexe-blanc link-type-button\">En attente</span>");
+                                        textCell.innerHTML = '<span class="indexe-supprimer indexe-blanc badge link-type-button margin-right-5">En attente</span>'+textCell.innerHTML;
+
                                         pasFini = true;
                                         break;
                                     case "1":
-                                        supprimerElementsByClass(linkType, 'indexe-supprimer');
+                                        supprimerElementsByClass(textCell, 'indexe-supprimer');
                                         //linkType.innerHTML += '<span class="indexe-supprimer indexe-vert link-type-button">Indexé</span>';
-                                        $('<span class="indexe-supprimer indexe-blanc link-type-button">En attente</span>').before(linkType);
+                                        //$('<span class="indexe-supprimer indexe-blanc link-type-button">En attente</span>').before(linkType);
+                                        //linkType.prepend("<span class=\"indexe-supprimer indexe-blanc link-type-button\">Indexé</span>");
+                                        textCell.innerHTML = '<span class="indexe-supprimer indexe-vert badge link-type-button margin-right-5">Indexé</span>'+textCell.innerHTML;
                                         total_fini++;
                                         total_indexe++;
                                         break;
                                     case "2":
-                                        supprimerElementsByClass(linkType, 'indexe-supprimer');
+                                        supprimerElementsByClass(textCell, 'indexe-supprimer');
                                         //linkType.innerHTML += '<span class="indexe-supprimer indexe-rouge link-type-button">Non indexé</span>';
-                                        $('<span class="indexe-supprimer indexe-rouge link-type-button">Non indexé</span>').before(linkType);
+                                        //$('<span class="indexe-supprimer indexe-rouge link-type-button">Non indexé</span>').before(linkType);
+                                        //linkType.prepend( "<span class=\"indexe-supprimer indexe-blanc link-type-button\">Non indexé</span>" );
+                                        textCell.innerHTML = '<span class="indexe-supprimer indexe-rouge badge link-type-button margin-right-5">Non indexé</span>'+textCell.innerHTML;
                                         total_fini++;
                                         total_non_indexe++;
                                         break;
@@ -288,13 +296,14 @@ $(function () {
                                 }
                                 tab_co.push({ u: index, s: tab_reponse[a].status });
                             } else {
-                                supprimerElementsByClass(linkType, 'indexe-supprimer');
+                                supprimerElementsByClass(textCell, 'indexe-supprimer');
                                 //var linkType = textCell.getElementsByClassName('linkType')[1];
-                                linkType = textCell.getElementsByTagName('a')[0];
+                                //linkType = textCell.getElementsByTagName('a')[0];
                                 //Effacer le contenu
                                 //linkType.innerHTML = "";
                                 //linkType.innerHTML += '<span class="indexe-supprimer indexe-blanc link-type-button">Pas disponnible</span>';
-                                $('<span class="indexe-supprimer indexe-blanc link-type-button">Pas disponnible</span>').before(linkType);
+                                //$('<span class="indexe-supprimer indexe-blanc link-type-button">Pas disponnible</span>').before(linkType);
+                                textCell.innerHTML = '<span class="indexe-supprimer indexe-blanc badge link-type-button margin-right-5">Pas disponnible</span>'+textCell.innerHTML;
                             }
                         }
                     }
@@ -327,9 +336,9 @@ $(function () {
             //console.log('ici');
 
             //Enregistrement du coockies         
-            var url_rechercher = $('#search_text').val();
+            var url_rechercher = new URL($('h4')[0].innerText.split(' ')[0]);
             var to_store = JSON.stringify(tab_co);
-            Cookies.set(url_rechercher, to_store);
+            Cookies.set(url_rechercher.hostname, to_store);
         }
     }
     ajoutDesUrls(tab_link);
