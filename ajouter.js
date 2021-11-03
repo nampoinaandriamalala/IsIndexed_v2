@@ -65,7 +65,7 @@ $(function () {
                 tab_urls.push(tab_link[index]);
             }
             var dataSend = {
-                project_name: window.location.host + " - " + $('#search_text').val() + " - " + datenow(),
+                project_name: window.location.host + " - " + $('#search_text').val(),
                 urls: tab_urls
             };
             var dataObj = {
@@ -324,7 +324,7 @@ $(function () {
             //Enregistrement du coockies         
             var url_rechercher = $('#search_text').val();
             var to_store = JSON.stringify(tab_co);
-            Cookies.set(url_rechercher, to_store);
+            Cookies.set(url_rechercher +'_'+document.getElementById('js-main-table').getElementsByClassName('currentPage')[0].innerText, to_store, { expires: 2 }); //2 jours
         }
     }
     ajoutDesUrls(tab_link);
