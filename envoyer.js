@@ -15,7 +15,7 @@ $(function () {
                     //Indication à l'utilisateur du plugin isindexed
                     //https://tool.isindexed.com/assets/plugins/global/plugins.bundle.css
                     var inject_html = '' +
-                        ' <div class="d-flex align-items-center flex-wrap"> ' +
+                        ' <div class="d-flex align-items-center flex-wrap row-indexed"> ' +
                         ' 			<!--begin: Item--> ' +
                         ' 			<div id="kt_datatable_search_status_all" class="d-flex align-items-center flex-lg-fill mr-5 my-1 datatable-selector datatable-selector-selected"> ' +
                         ' 				<span class="mr-4"> <i class="flaticon-list-3 icon-2x text-muted font-weight-bold"></i> ' +
