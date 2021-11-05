@@ -2,7 +2,7 @@ div#isindexed-div {
     margin-left: 20px;
     font-size: 20px;
     padding: 10px;
-    color: white;
+    color: black;
     margin-top: 50px;
   }
 
@@ -34,7 +34,7 @@ div#isindexed-div {
 
 .row-indexed {
   border: 1px solid #e7e7e7;
-  margin: 50px 20px 0px 25px;
+  margin: 20px 20px 0px 25px;
   padding-left: 20px;
   padding-top: 10px;
   padding-bottom: 10px;
@@ -96,4 +96,19 @@ div#isindexed-div {
 
 .fa-black {
   color: #b5b5c3!important;
+}
+
+.block-text-2 {
+  display: grid;
+  padding: 10px;
+}
+
+.block-support-2 {
+  width: 300px;
+}
+
+.block-progress {
+  float: right;
+  margin-top: -22px;
+  margin-right: -50px;
 }

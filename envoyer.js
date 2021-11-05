@@ -13,7 +13,12 @@ $(function () {
                 case "majestic.com":
 
                     //Indication à l'utilisateur du plugin isindexed
-                    //https://tool.isindexed.com/assets/plugins/global/plugins.bundle.css
+
+                    $("<div id='isindexed-div'><p>Envoyer un test d'indexation des 50 backlinks ci-dessous sur </p><p>isindexed.com en cliquant sur le plugin chrome isindexed. </p></div>").insertBefore("#js-main-table");
+                    $('div#isindexed-div').css({
+                        'background-color': 'white'
+                    });
+                    
                     var inject_html = '' +
                         ' <div class="row-indexed"> ' +
                         ' 			<!--begin: Item--> ' +
@@ -51,17 +56,20 @@ $(function () {
                         '                   <span class="font-weight-bolder font-size-h5">0 (0.00%) </span> ' +
                         ' 				</div> ' +
                         ' 			</div> ' +
-                        ' 			<!--end: Item--> ' +            
+                        ' 			<!--end: Item--> ' +   
+                        ' 			<!--begin: Item--> ' +
+                        ' 			<div class="block-support-2"> ' +
+                        ' 				<div class="block-fav fa-dark"><i class="fa fa-spinner" aria-hidden="true"></i></div>' +
+                        ' 				<div class="block-text-2"> ' +
+                        ' 					<div class="wrapperTimer"></div> '+
+                        ' 				</div> ' +
+                        '               <div class="font-weight-bolder font-size-h5 block-progress">100%</span> ' +
+                        ' 			</div> ' +
+                        ' 			<!--end: Item--> ' +          
                         ' 		</div> ';
                     //$('<i class="fa fa-check" aria-hidden="true"></i>').insertBefore("#js-main-table");
                     $(inject_html).insertBefore("#js-main-table");
-                    inject_html
 
-                    $("<div id='isindexed-div'><p>Envoyer un test d'indexation des 50 backlinks ci-dessous sur </p><p>isindexed.com en cliquant sur le plugin chrome isindexed. </p></div>").insertBefore("#js-main-table");
-                    $("<div id='isindexed-div'><p>Envoyer un test d'indexation des 50 backlinks ci-dessous sur </p><p>isindexed.com en cliquant sur le plugin chrome isindexed. </p></div>").insertBefore("#js-main-table");
-                    $('div#isindexed-div').css({
-                        'background-color': '#4f81bd'
-                    });
 
 
                     // options
