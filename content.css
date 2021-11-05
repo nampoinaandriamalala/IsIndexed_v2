@@ -41,92 +41,59 @@ div#isindexed-div {
   width: calc(100% - 50px);
 } 
 
-.align-items-center {
-  -webkit-box-align: center!important;
-  -ms-flex-align: center!important;
-  align-items: center!important;
-}
-
-.flex-wrap {
-  -ms-flex-wrap: wrap!important;
-  flex-wrap: wrap!important;
-}
-
-.d-flex {
-  /* display: -webkit-box!important;
-  display: -ms-flexbox!important;
-  display: flex!important; */
-  border: 1px solid red;
-}
-
-.datatable-selector.datatable-selector-selected {
-  border-bottom: 5px solid #eef0f8;
-  padding-bottom: 20px !important;
-}
-
-.mr-4, .mx-4 {
-  margin-right: 1rem !important;
-}
-
-.text-dark-75 {
-  color: #3f4254!important;
-}
-
-.flex-column {
-  -webkit-box-orient: vertical!important;
-  -webkit-box-direction: normal!important;
-  -ms-flex-direction: column!important;
-  flex-direction: column!important;
-}
-
 .font-size-sm {
-  font-size: .925rem;
+  font-size: 10px;
 }
 
 .font-weight-bolder {
-  font-weight: 600!important;
+  font-weight: 600;
 }
 
 .text-dark-75 {
-  color: #3f4254!important;
+  color: #3f4254;
 }
 
 .font-size-h5 {
-  font-size: 1.25rem!important;
+  font-size: 14px;
 }
 
 .font-weight-bolder {
-  font-weight: 600!important;
+  font-weight: 600;
 }
 
-.progress {
-  display: -webkit-box;
-  display: -ms-flexbox;
+.row-indexed {
   display: flex;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-  -ms-flex-direction: column;
-  flex-direction: column;
-  -webkit-box-pack: center;
-  -ms-flex-pack: center;
-  justify-content: center;
-  overflow: hidden;
-  color: #fff;
-  text-align: center;
-  white-space: nowrap;
-  background-color: #3699ff;
-  -webkit-transition: width .6s ease;
-  transition: width .6s ease;
 }
 
-.w-150px {
-  width: 150px !important;
+.block-support {
+  width: 200px;
+  /* border: 1px solid green; */
 }
 
-.progress.progress-xs {
-  height: 0.5rem;
+.block-fav {
+  /*border: 1px solid red;*/
+  width: 30px;
+  height: 30px;
+  font-size: 30px;
+  float: left;
 }
 
-.bg-success {
-  background-color: #24AA3D !important;
+.block-text {
+  display: grid;
+}
+
+.fa-yellow {
+  color: #ffa800;
+}
+
+.fa-red {
+  color: #f64e60!important;
+}
+
+.fa-green {
+  color: #24AA3D !important;
+}
+
+.fa-black {
+  color: #b5b5c3!important;
 }

@@ -24,7 +24,7 @@
 
     "content_scripts": [ {
         "matches": ["*://*.majestic.com/reports/site-explorer/top-backlinks*","https://www.babbar.tech/url/backlinks/url*"],
-        "js": ["js.cookie.js","jquery.min.js","envoyer.js"],
+        "js": ["js.cookie.js","jquery.min.js","envoyer.js","js/ProBar.js"],
         "css": ["envoyer.css","content.css", "css/font-awesome.css"]
     } ],
     "web_accessible_resources": [        

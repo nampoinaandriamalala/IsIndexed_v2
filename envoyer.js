@@ -15,67 +15,43 @@ $(function () {
                     //Indication à l'utilisateur du plugin isindexed
                     //https://tool.isindexed.com/assets/plugins/global/plugins.bundle.css
                     var inject_html = '' +
-                        ' <div class="d-flex align-items-center flex-wrap row-indexed"> ' +
+                        ' <div class="row-indexed"> ' +
                         ' 			<!--begin: Item--> ' +
-                        ' 			<div id="kt_datatable_search_status_all" class="d-flex align-items-center flex-lg-fill mr-5 my-1 datatable-selector datatable-selector-selected"> ' +
-                        ' 				<span class="mr-4"> <i class="flaticon-list-3 icon-2x text-muted font-weight-bold"></i> ' +
-                        ' 				</span> ' +
-                        ' 				<div class="d-flex flex-column text-dark-75"> ' +
-                        ' 					<span class="font-weight-bolder font-size-sm">Tous les liens</span> <span class="font-weight-bolder font-size-h5">50 </span> ' +
+                        ' 			<div class="block-support"> ' +
+                        ' 				<div class="block-fav fa-black"><i class="fa fa-bars" aria-hidden="true"></i></div>' +
+                        ' 				<div class="block-text"> ' +
+                        ' 					<span class="font-weight-bolder font-size-sm">Tous les liens</span> '+
+                        '                   <span class="font-weight-bolder font-size-h5">50 </span> ' +
                         ' 				</div> ' +
                         ' 			</div> ' +
-                        ' 			<!--end: Item--> ' +
+                        ' 			<!--end: Item--> ' +     
                         ' 			<!--begin: Item--> ' +
-                        ' 			<div id="kt_datatable_search_status_indexed" class="d-flex align-items-center flex-lg-fill mr-5 my-1 datatable-selector"> ' +
-                        ' 				<span class="mr-4"> <i class="flaticon2-check-mark text-success icon-2x font-weight-bold"></i> ' +
-                        ' 				</span> ' +
-                        ' 				<div class="d-flex flex-column text-dark-75"> ' +
-                        ' 					<span class="font-weight-bolder font-size-sm">Indexés</span> <span class="font-weight-bolder font-size-h5">45 (90.00%)</span> ' +
+                        ' 			<div class="block-support"> ' +
+                        ' 				<div class="block-fav fa-green"><i class="fa fa-check" aria-hidden="true"></i></div>' +
+                        ' 				<div class="block-text"> ' +
+                        ' 					<span class="font-weight-bolder font-size-sm">Indexés</span> '+
+                        '                   <span class="font-weight-bolder font-size-h5">45 (90.00%) </span> ' +
                         ' 				</div> ' +
                         ' 			</div> ' +
-                        ' 			<!--end: Item--> ' +
+                        ' 			<!--end: Item--> ' +  
                         ' 			<!--begin: Item--> ' +
-                        ' 			<div id="kt_datatable_search_status_nonindexed" class="d-flex align-items-center flex-lg-fill mr-5 my-1 datatable-selector"> ' +
-                        ' 				<span class="mr-4"> <i class="flaticon2-cancel-music text-danger icon-2x font-weight-bold"></i> ' +
-                        ' 				</span> ' +
-                        ' 				<div class="d-flex flex-column text-dark-75"> ' +
-                        ' 					<span class="font-weight-bolder font-size-sm">Non indexés</span> <span class="font-weight-bolder font-size-h5">5 (10.00%)</span> ' +
+                        ' 			<div class="block-support"> ' +
+                        ' 				<div class="block-fav fa-red"><i class="fa fa-times" aria-hidden="true"></i></div>' +
+                        ' 				<div class="block-text"> ' +
+                        ' 					<span class="font-weight-bolder font-size-sm">Non indexés</span> '+
+                        '                   <span class="font-weight-bolder font-size-h5">5 (10.00%)</span> ' +
                         ' 				</div> ' +
                         ' 			</div> ' +
-                        ' 			<!--end: Item--> ' +
+                        ' 			<!--end: Item--> ' +  
                         ' 			<!--begin: Item--> ' +
-                        ' 			<div id="kt_datatable_search_status_pending" class="d-flex align-items-center flex-lg-fill mr-5 my-1 datatable-selector"> ' +
-                        ' 				<span class="mr-4"> <i class="flaticon2-sort-down text-warning icon-2x font-weight-bold"></i> ' +
-                        ' 				</span> ' +
-                        ' 				<div class="d-flex flex-column text-dark-75"> ' +
-                        ' 					<span class="font-weight-bolder font-size-sm">En attente</span> <span class="font-weight-bolder font-size-h5">0 (0.00%)</span> ' +
+                        ' 			<div class="block-support"> ' +
+                        ' 				<div class="block-fav fa-yellow"><i class="fa fa-clock-o" aria-hidden="true"></i></div>' +
+                        ' 				<div class="block-text"> ' +
+                        ' 					<span class="font-weight-bolder font-size-sm">En attente</span> '+
+                        '                   <span class="font-weight-bolder font-size-h5">0 (0.00%) </span> ' +
                         ' 				</div> ' +
                         ' 			</div> ' +
-                        ' 			<!--end: Item--> ' +
-                        ' 			<!--begin: Item--> ' +
-                        ' 			<div class="d-flex align-items-center flex-lg-fill mr-5 my-1"> ' +
-                        ' 				<span class="mr-4 svg-icon-md"> ' +
-                        ' 					    					<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="50px" height="50px" viewBox="0 0 100 100" preserveAspectRatio="xMidYMid" style="margin-right:-2px;display:block;background-repeat-y:initial;background-repeat-x:initial;background-color:rgb(255, 255, 255);animation-play-state:paused"><g style="animation-play-state:paused"><circle cx="94.74272155761719" cy="50" r="4" fill="#e15b64" fill-opacity="0.02144" style="animation-play-state:paused"></circle> ' +
-                        '                             <circle cx="94.87328338623047" cy="50" r="4" fill="#e15b64" fill-opacity="0.01056" style="animation-play-state:paused"></circle> ' +
-                        '                             <circle cx="95" cy="50" r="4" fill="#e15b64" fill-opacity="0" style="animation-play-state:paused"></circle></g> ' +
-                        '                             <g transform="translate(-15 0)" style="transform:matrix(1, 0, 0, 1, -15, 0);animation-play-state:paused"><path d="M50 50L20 50A30 30 0 0 0 80 50Z" fill="#24aa3d" transform="rotate(90 50 50)" style="transform:matrix(6.12323e-17, 1, -1, 6.12323e-17, 100, 0);animation-play-state:paused"></path> ' +
-                        '                             <path d="M50 50L20 50A30 30 0 0 0 80 50Z" fill="#24aa3d" transform="matrix(1,0,0,1,0,0)" style="transform:matrix(1, 0, 0, 1, 0, 0);animation-play-state:paused"></path>   ' +
-                        '                             <path d="M50 50L20 50A30 30 0 0 1 80 50Z" fill="#24aa3d" transform="matrix(1,0,0,1,0,0)" style="transform:matrix(1, 0, 0, 1, 0, 0);animation-play-state:paused"></path></g> ' +
-                        '                         </svg> ' +
-                        ' 									</span> ' +
-                        ' 				<div class="d-flex flex-column text-dark-75"> ' +
-                        ' 					<!--begin::Progress--> ' +
-                        ' 					<div class="d-flex mt-4 mt-sm-0"> ' +
-                        ' 						<span class="font-weight-bold mr-4">Achèvement</span> ' +
-                        ' 						<div class="progress progress-xs mt-2 mb-2 flex-shrink-0 w-150px w-xl-250px"> ' +
-                        ' 							<div class="progress-bar bg-success" role="progressbar" style="width: 100.00%;" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div> ' +
-                        ' 						</div> ' +
-                        ' 						<span class="font-weight-bolder text-dark ml-4">100.00%</span> ' +
-                        ' 					</div> ' +
-                        ' 					<!--end::Progress--> ' +
-                        ' 				</div> ' +
-                        ' 			</div> ' +
-                        ' 			<!--end: Item--> ' +
+                        ' 			<!--end: Item--> ' +            
                         ' 		</div> ';
                     //$('<i class="fa fa-check" aria-hidden="true"></i>').insertBefore("#js-main-table");
                     $(inject_html).insertBefore("#js-main-table");
@@ -87,6 +63,21 @@ $(function () {
                         'background-color': '#4f81bd'
                     });
 
+
+                    // options
+                    // options
+                    var optionsTimer = {
+                        color: "#09b1ba", // color of the Progress bar. 
+                        bgColor: "#efefef", // color background of the Progress bar
+                        speed: 0.3, // speed of animation. ( unit in secondes )
+                        wrapper: ".wrapperTimer", // the wrapper who append ProBar. if use class => ".class" ,if use id => "#id" 
+                        finishAnimation: false, // default "true", this option give you a animation at the end "100%".
+                        classNameBar: "timer",
+                        wrapperId: "wrapperTimerId"
+                    };
+                    var timebar = new ProBar(optionsTimer);
+                    timebar.goto(30);
+                    
                     //console.log(window.location.host);
                     var recherche = $('#search_text').val();
                     if (Cookies.get(recherche + '_' + document.getElementById('js-main-table').getElementsByClassName('currentPage')[0].innerText)) {
