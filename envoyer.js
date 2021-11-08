@@ -847,7 +847,7 @@ $(function () {
                     //collecteIsIndexed(ligne.id, tokken);
                 }
             } catch (e) {
-                alert("Il y a eu problème lors de l'ajout des urls.")
+                alert("Il y a eu problème lors de la vérification!")
             }
         });
     });
