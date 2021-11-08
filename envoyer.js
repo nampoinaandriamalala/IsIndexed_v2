@@ -580,15 +580,21 @@ $(function () {
                         $('#pour_nb_indexed').text((nb_indexed * 100) / nb_total);
                         $('#pour_nb_non_indexed').text((nb_non_indexed * 100) / nb_total);
                         $('#pour_nb_attente').text((nb_attente * 100) / nb_total);
+
+                        //Progres bar
+                        var apa = 100 - (nb_attente * 100) / nb_total;
+                        timebar.goto(apa);
+                        $('#affichage-pourcentage-avancement').text(apa);
+
                     } else {
                         $('#pour_nb_indexed').text(0);
                         $('#pour_nb_non_indexed').text(0);
                         $('#pour_nb_attente').text(0);
+                        timebar.goto(100);
+                        $('#affichage-pourcentage-avancement').text(100);
                     }
-                    //Progres bar
-                    var apa = 100 - (nb_attente * 100) / nb_total;
-                    timebar.goto(apa);
-                    $('#affichage-pourcentage-avancement').text(apa);
+
+                    
                 }
             }
         }
@@ -618,7 +624,8 @@ $(function () {
             //Enregistrement du coockies         
             var url_rechercher = $('#search_text').val();
             var to_store = JSON.stringify(tab_co);
-            Cookies.set(url_rechercher + '_' + document.getElementById('js-main-table').getElementsByClassName('currentPage')[0].innerText, to_store, { expires: 2 }); //2 jours
+            if (to_store != "[]")
+                Cookies.set(url_rechercher + '_' + document.getElementById('js-main-table').getElementsByClassName('currentPage')[0].innerText, to_store, { expires: 2 }); //2 jours
         }
     }
 
