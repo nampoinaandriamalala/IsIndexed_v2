@@ -181,13 +181,12 @@ $(function () {
         });
     }
 
-    function supprimerElementsByClass(elementRecherche,classeasupprimer)
-    {
+    function supprimerElementsByClass(elementRecherche, classeasupprimer) {
         //console.log('ici');
         var col_wrapper = elementRecherche.getElementsByClassName(classeasupprimer);
-        var len = col_wrapper.length;                                        
-        for (var i = 0; i < len; i++) {                                
-                col_wrapper[i].remove();                                            
+        var len = col_wrapper.length;
+        for (var i = 0; i < len; i++) {
+            col_wrapper[i].remove();
         }
     }
     function restructurationDuDom(json, id_projet, tokken) {
@@ -213,7 +212,7 @@ $(function () {
         total_indexe = 0;
         total_non_indexe = 0;
 
-        var tab_co = [] ;
+        var tab_co = [];
         //console.log(tr);
         for (let index = 2; index < tr.length; index++) {
             const element = tr[index];
@@ -255,7 +254,7 @@ $(function () {
                                             // }
                                             break;
                                     }
-                                    
+
                                 }
 
                                 //Effacer le contenu
@@ -263,18 +262,18 @@ $(function () {
 
                                 switch (tab_reponse[a].status) {
                                     case "0":
-                                        supprimerElementsByClass(linkType,'indexe-supprimer');
+                                        supprimerElementsByClass(linkType, 'indexe-supprimer');
                                         linkType.innerHTML += '<span class="indexe-supprimer indexe-blanc link-type-button">En attente</span>';
                                         pasFini = true;
                                         break;
                                     case "1":
-                                        supprimerElementsByClass(linkType,'indexe-supprimer');
+                                        supprimerElementsByClass(linkType, 'indexe-supprimer');
                                         linkType.innerHTML += '<span class="indexe-supprimer indexe-vert link-type-button">Indexé</span>';
                                         total_fini++;
                                         total_indexe++;
                                         break;
                                     case "2":
-                                        supprimerElementsByClass(linkType,'indexe-supprimer');
+                                        supprimerElementsByClass(linkType, 'indexe-supprimer');
                                         linkType.innerHTML += '<span class="indexe-supprimer indexe-rouge link-type-button">Non indexé</span>';
                                         total_fini++;
                                         total_non_indexe++;
@@ -282,14 +281,14 @@ $(function () {
                                     default:
                                         break;
                                 }
-                                tab_co.push({u:index,s:tab_reponse[a].status});
+                                tab_co.push({ u: index, s: tab_reponse[a].status });
                             } else {
-                                supprimerElementsByClass(linkType,'indexe-supprimer');
+                                supprimerElementsByClass(linkType, 'indexe-supprimer');
                                 var linkType = textCell.getElementsByClassName('linkType')[1];
 
                                 //Effacer le contenu
                                 //linkType.innerHTML = "";
-                                linkType.innerHTML +='<span class="indexe-supprimer indexe-blanc link-type-button">Pas disponnible</span>';
+                                linkType.innerHTML += '<span class="indexe-supprimer indexe-blanc link-type-button">Pas disponnible</span>';
                             }
                         }
                     }
@@ -314,7 +313,7 @@ $(function () {
         } else {
             //Indication
             $('div#isindexed-div').remove();
-            $("<div id='isindexed-div'><p>Toute la liste a été vérifiée!</p><p>Nombre total de backlinks testés : "+total+"</p><p>Nombre total de backlinks indexés : "+total_indexe+"</p><p>Nombre total de backlinks non indexé : "+total_non_indexe+"</p></div>").insertBefore("#js-main-table");
+            $("<div id='isindexed-div'><p>Toute la liste a été vérifiée!</p><p>Nombre total de backlinks testés : " + total + "</p><p>Nombre total de backlinks indexés : " + total_indexe + "</p><p>Nombre total de backlinks non indexé : " + total_non_indexe + "</p></div>").insertBefore("#js-main-table");
             $('div#isindexed-div').css({
                 'background-color': '#29b0039e'
             });
@@ -324,7 +323,7 @@ $(function () {
             //Enregistrement du coockies         
             var url_rechercher = $('#search_text').val();
             var to_store = JSON.stringify(tab_co);
-            Cookies.set(url_rechercher +'_'+document.getElementById('js-main-table').getElementsByClassName('currentPage')[0].innerText, to_store, { expires: 2 }); //2 jours
+            Cookies.set(url_rechercher + '_' + document.getElementById('js-main-table').getElementsByClassName('currentPage')[0].innerText, to_store, { expires: 2 }); //2 jours
         }
     }
     ajoutDesUrls(tab_link);
