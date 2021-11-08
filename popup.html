@@ -6,9 +6,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link rel="stylesheet" href="popup/style.css">
+    <link rel="stylesheet" href="popup/bootstrap.min.css">
     <script src="jquery.min.js"></script>
     <script src="popup/script.js"></script>
-    
+
+    <!-- font awesome -->
+    <link rel="stylesheet" href="popup/font-awesome/css/font-awesome.min.css"/>
     
 </head>
 <body>
@@ -16,26 +19,34 @@
         <div class="contenu">
             <div>Gestion de l'extension IsIndexed</div>            
         </div>
-        <div class="espace-token">
-            <div class="label-token">Votre crédit est de : <span id="isindexed_credit">0</span></div> 
+        <div class="row p-2">
+            <div class="col-12">
+                <div class="row mt-2">
+                    <div class="col-12">
+                        <div class="label-token">Votre crédit est de : <span id="isindexed_credit">0</span></div> 
+                    </div>
+                </div>
+                <div class="row mt-2">
+                    <div class="col-12"> 
+                        <div class="input-group mb-3">
+                            <input type="text" class="form-control" id="isindexed_token"  placeholder="Votre clé API personnelle" aria-label="Votre clé API personnelle" aria-describedby="enregistrer">
+                            <button class="btn btn-outline-secondary" id="enregistrer" type="button">Enregister</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="row mt-2">
+                    <div class="col align-self-center text-center">
+                        <div class="label-btn"><button id="ajouter" class="btn btn-primary"><i class="fa fa-plus" aria-hidden="true"></i> Ajouter projet</button></div>
+                    </div>
+                </div>
+            </div>
         </div>
-        <div class="espace-token">
-            <div class="label-token">Token</div> 
-            <div class="label-input"><input type="text" id="isindexed_token"/></div>
-            <div class="label-btn"><button id="enregistrer" class="btn-indexed btn-save">Enregistrer</button></div>
-            <!-- <div class="label-btn"><button id="voir">Voir</button></div> -->
-        </div>
-        <div class="espace-token espace-center">
-            <!-- <input type="text" id="isindexed_ajouter"/> -->
-            <div class="label-btn"><button id="ajouter" class="btn-indexed btn-verify">Vérifier la page!</button></div>
-        </div>    
-        <!-- <div class="espace-token">
-            <input type="text" id="isindexed_voir"/>
-            <div class="label-btn"><button id="voir">Voir</button></div>
-        </div>    -->
         <div class="espace-chargement" id="chargement">
             <img src="images/loader.gif" alt="" class="image-chargement">
-        </div>   
+        </div> 
+            </div>
+        </div>
+          
     </div>
 </body>
 </html>

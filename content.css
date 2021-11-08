@@ -114,3 +114,44 @@ div#isindexed-div {
   margin-top: -22px;
   margin-right: -50px;
 }
+
+.block-fav-2 {
+  width: 30px;
+  height: 30px;
+  font-size: 9px;
+  float: left;
+}
+
+.btn-primary-is {
+  background-color: #3699ff !important;
+}
+.btn-secondary-is {
+  background-color: #8c878d !important;
+}
+
+.btn-success-is {
+  background-color: #24aa3d !important;
+}
+
+.isindexed-text {
+  font-size: 14px;
+  font-weight: bold;
+  padding-bottom: 12px;
+  padding-top: 10px;
+}
+
+.mgl-1 {
+  margin-left: 5px;
+}
+
+.mgl-2 {
+  margin-left: 10px;
+}
+
+.mgr-1 {
+  margin-right: 5px;
+}
+
+.mgr-2 {
+  margin-right: 10px;
+}
