@@ -22,8 +22,8 @@ $(function () {
                                 "<div id='isindexed-div'>" +
                                 "<div class='isindexed-text'>Envoyer un test d'indexation des 50 backlinks ci-dessous sur isindexed.com en cliquant sur le plugin chrome isindexed. </div>" +
                                 "<div class='isindexed-espace-btn'>" +
-                                "<button class='btn btn-primary-is mgr-2'><i class='fa fa-retweet' aria-hidden='true'></i> Raffraichir</button>" +
-                                "<button class='btn btn-secondary-is mgr-2'><i class='fa fa-search' aria-hidden='true'></i> Revérifier</button>" +
+                                "<button class='btn btn-primary-is mgr-2' id='raffraichir'><i class='fa fa-retweet' aria-hidden='true'></i> Raffraichir</button>" +
+                                "<button class='btn btn-secondary-is mgr-2' id='reverifier'><i class='fa fa-search' aria-hidden='true'></i> Revérifier</button>" +
                                 "<button class='btn btn-success-is' id='ajouter'><i class='fa fa-plus' aria-hidden='true'></i> Ajouter le projet</button>" +
                                 "<div/>" +
                                 "</div>";
@@ -488,6 +488,29 @@ $(function () {
         }
     }
 
+    function reverifierProjet(id_projet,tokken) {
+        //Indication
+        $('#fav-load').empty();
+        $('#fav-load').append('<i class="fa fa-spinner fa-spin fa-3x fa-fw"></i>');
+        $("#fav-load").attr('class', 'block-fav-2 fa-dark');
+        //Post
+        var dataSend = { "vide": "vide" };
+        var dataObj = {
+            url: 'https://tool.isindexed.com/api/v1/project/'+id_projet+'/check/all',
+            authorization: tokken,
+            data: JSON.stringify(dataSend)
+        }
+        $.ajax({
+            url: "https://captureserp.com/isindexed/action.php",
+            type: "POST",
+            dataType: "json",
+            data: $.param(dataObj),
+            error: function () {
+                //alert("Cannot get data");
+            }
+        });
+    }
+
     function collecteIsIndexed(id_projet, tokken) {
 
         //Indication
@@ -722,11 +745,11 @@ $(function () {
     //Event
     $(document).on('click', '#ajouter', function (e) {
 
-        //Fin fonction
+        //Ajout nouveau projet ou ajout nouveaux urls dans le projet
         var tab_link = recuperationDesLiens();
         var promise = voirSiProjetExisteAvantAjout(tokken);
         promise.success(function (datas) {
-            
+
             //Vérifier si le projet existe
             try {
                 var json = JSON.parse(datas);
@@ -753,5 +776,81 @@ $(function () {
         });
 
     });
+
+    $(document).on('click', '#raffraichir', function (e) {
+
+        //Raffraichir la page selon le projet enregistrer
+        var tab_link = recuperationDesLiens();
+        var promise = voirSiProjetExisteAvantAjout(tokken);
+        promise.success(function (datas) {
+
+            //Vérifier si le projet existe
+            try {
+                var json = JSON.parse(datas);
+                //Affichage des données
+                var trouver = false;
+                var ligne = null;
+                for (let index = 0; index < json.projects.length; index++) {
+                    //const element = array[index];
+                    var nom_projet = window.location.host + " - " + $('#search_text').val();
+                    if (json.projects[index].name == nom_projet) {
+                        ligne = json.projects[index];
+                        trouver = true;
+                        break;
+                    }
+                }
+                if (trouver == false) {
+                    //ajoutDesUrls(tab_link);
+                    var nom_projet = window.location.host + " - " + $('#search_text').val();
+                    alert("Le projet [" + nom_projet + "] n'existe pas encore!");
+                } else {
+                    //Affichage des données
+                    collecteIsIndexed(ligne.id, tokken);
+                }
+            } catch (e) {
+                alert("Il y a eu problème lors de l'ajout des urls.")
+            }
+        });
+    });
+
+    $(document).on('click', '#reverifier', function (e) {
+
+        //Revérifier les urls du projet qui sont enregistrés
+        var promise = voirSiProjetExisteAvantAjout(tokken);
+        promise.success(function (datas) {
+
+            //Vérifier si le projet existe
+            try {
+                var json = JSON.parse(datas);
+                //Affichage des données
+                var trouver = false;
+                var ligne = null;
+                for (let index = 0; index < json.projects.length; index++) {
+                    //const element = array[index];
+                    var nom_projet = window.location.host + " - " + $('#search_text').val();
+                    if (json.projects[index].name == nom_projet) {
+                        ligne = json.projects[index];
+                        trouver = true;
+                        break;
+                    }
+                }
+                if (trouver == false) {
+                    //ajoutDesUrls(tab_link);
+                    var nom_projet = window.location.host + " - " + $('#search_text').val();
+                    alert("Le projet [" + nom_projet + "] n'existe pas encore!");
+                } else {
+                    promise2 = reverifierProjet(ligne.id, tokken);
+                    promise2.success(function(datax){
+                        console.log(datax);
+                    });
+                    //Affichage des données
+                    //collecteIsIndexed(ligne.id, tokken);
+                }
+            } catch (e) {
+                alert("Il y a eu problème lors de l'ajout des urls.")
+            }
+        });
+    });
+
 
 })
