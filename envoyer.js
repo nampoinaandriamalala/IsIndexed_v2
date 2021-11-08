@@ -212,7 +212,7 @@ $(function () {
                             $('#fav-load').append('<i class="fa fa-spinner" aria-hidden="true"></i>');
                             $("#fav-load").attr('class', 'block-fav fa-dark');
 
-                            console.log('nb_indexed');
+                            //console.log('nb_indexed');
                             // console.log('Value currently is ' + tokken);
                             break;
                         case "ahrefs.com":
@@ -236,7 +236,8 @@ $(function () {
             alert('Veuillez saisir votre clé API sur le plugin Isindexed!');
         }
     });
-    //fonction
+
+    //Début fonction
     function supprimerElementsByClass(elementRecherche, classeasupprimer) {
         var col_wrapper = elementRecherche.getElementsByClassName(classeasupprimer);
         var len = col_wrapper.length;
@@ -246,7 +247,7 @@ $(function () {
     }
 
     function voirSiProjetExiste(tokken) {
-        console.log('voirSiProjetExiste');
+        //console.log('voirSiProjetExiste');
         // var dataSend = {
         //     project_name: window.location.host + " - " + $('#search_text').val(),
         // };
@@ -270,7 +271,7 @@ $(function () {
                 // console.log(json);            
                 try {
                     var json = JSON.parse(data);
-                    console.log(json);
+                    //console.log(json);
 
                     //Affichage des données
                     //collecteIsIndexed(json.id, config.tokken);
@@ -278,24 +279,13 @@ $(function () {
                         //const element = array[index];
                         var nom_projet = window.location.host + " - " + $('#search_text').val();
                         if (json.projects[index].name == nom_projet) {
-                            console.log(json.projects[index]);
+                            //console.log(json.projects[index]);
                             //Affichage des données
                             collecteIsIndexed(json.projects[index].id, tokken);
                         }
                     }
                 } catch (e) {
                     console.log('erreur');
-                    //Indication
-                    // $('div#isindexed-div').remove();
-                    // $("<div id='isindexed-div'><p>En attente de la fin du projet sur isindexed.com. </p><p>Nouvelle tentative de récupération des résutats dans 5s!</p></div>").insertBefore("#js-main-table");
-                    // $('div#isindexed-div').css({
-                    //     'background-color': '#c82e2e'
-                    // });
-                    // //Supprimer le message après 5s
-                    // setTimeout(function () {
-                    //     $('div#isindexed-div').remove();
-                    //     ajoutDesUrls(tab_link);
-                    // }, 5000);
                 }
 
             },
@@ -305,7 +295,33 @@ $(function () {
         });
     }
 
-    //Début fonction
+    function voirSiProjetExisteAvantAjout(tokken) {
+        console.log('voirSiProjetExisteAvantAjout');
+        // var dataSend = {
+        //     project_name: window.location.host + " - " + $('#search_text').val(),
+        // };
+
+        var dataSend = { "vide": "vide" };
+
+        var dataObj = {
+            url: 'https://tool.isindexed.com/api/v1/project/list',
+            authorization: tokken,
+            data: JSON.stringify(dataSend)
+        }
+        // console.log(dataObj);
+        // exit();
+        return $.ajax({
+            url: "https://captureserp.com/isindexed/action.php",
+            type: "POST",
+            dataType: "json",
+            data: $.param(dataObj),
+            error: function () {
+                id_sortie = 0;
+                return id_sortie;
+            }
+        });
+    }
+
     function recuperationDesLiens() {
         var tab_link = [];
         var vue_backlinks_table = document.getElementById('vue-backlinks-table');
@@ -326,6 +342,7 @@ $(function () {
         }
         return tab_link;
     }
+
     function datenow() {
         var date = new Date();
         var sortie = date.getFullYear().toString() + pad2(date.getMonth() + 1) + pad2(date.getDate()) + pad2(date.getHours()) + pad2(date.getMinutes()) + pad2(date.getSeconds());
@@ -351,6 +368,75 @@ $(function () {
             };
             var dataObj = {
                 url: 'https://tool.isindexed.com/api/v1/project/add',
+                authorization: tokken,
+                data: JSON.stringify(dataSend)
+            }
+            // console.log(dataObj);
+            // exit();
+            $.ajax({
+                url: "https://captureserp.com/isindexed/action.php",
+                type: "POST",
+                dataType: "json",
+                data: $.param(dataObj),
+                success: function (data) {
+                    // var json = $.parseJSON(data);
+                    // console.log(json);            
+                    try {
+                        var json = JSON.parse(data);
+                        //console.log(json);
+
+                        //Affichage des données
+                        collecteIsIndexed(json.id, tokken);
+                    } catch (e) {
+                        //Indication
+                        $('#fav-load').empty();
+                        $('#fav-load').append('<i class="fa fa-spinner fa-spin fa-3x fa-fw"></i>');
+                        $("#fav-load").attr('class', 'block-fav-2 fa-dark');
+                        //Supprimer le message après 5s
+                        setTimeout(function () {
+                            $('div#isindexed-div').remove();
+                            ajoutDesUrls(tab_link);
+                        }, 5000);
+                    }
+
+                },
+                error: function () {
+                    //alert("Cannot get data");
+                }
+            });
+        } else {
+            //Supprimer le message après 10s
+            //Indication
+            $('div#isindexed-div').remove();
+            $("<div id='isindexed-div'>Nous n\'avons pas trouvé de lien!</div>").insertBefore("#js-main-table");
+            $('div#isindexed-div').css({
+                'background-color': '#c82e2e'
+            });
+            setTimeout(function () {
+                $('div#isindexed-div').remove();
+                ajoutDesUrls(tab_link);
+            }, 10000);
+        }
+    }
+
+    function ajoutDesUrlsManquants(tab_link, id_projet) {
+        //console.log(tab_link);
+        //Envoye de la requête
+        if (tab_link.length > 0) {
+            //Indication
+            $('#fav-load').empty();
+            $('#fav-load').append('<i class="fa fa-spinner fa-spin fa-3x fa-fw"></i>');
+            $("#fav-load").attr('class', 'block-fav-2 fa-dark');
+
+            var tab_urls = [];
+            for (var index = 0; index < tab_link.length; index++) {
+                tab_urls.push(tab_link[index]);
+            }
+            var dataSend = {
+                urls: tab_urls
+            };
+            var dataObj = {
+                url: 'https://tool.isindexed.com/api/v1/project/' + id_projet + '/check/partial',
                 authorization: tokken,
                 data: JSON.stringify(dataSend)
             }
@@ -594,7 +680,7 @@ $(function () {
                         $('#affichage-pourcentage-avancement').text(100);
                     }
 
-                    
+
                 }
             }
         }
@@ -629,14 +715,42 @@ $(function () {
         }
     }
 
-    function pad2(n) { return n < 10 ? '0' + n : n }
+    function pad2(n) {
+        return n < 10 ? '0' + n : n
+    }
+
     //Event
     $(document).on('click', '#ajouter', function (e) {
 
         //Fin fonction
         var tab_link = recuperationDesLiens();
-
-        ajoutDesUrls(tab_link);
+        var promise = voirSiProjetExisteAvantAjout(tokken);
+        promise.success(function (datas) {
+            
+            //Vérifier si le projet existe
+            try {
+                var json = JSON.parse(datas);
+                //Affichage des données
+                var trouver = false;
+                var ligne = null;
+                for (let index = 0; index < json.projects.length; index++) {
+                    //const element = array[index];
+                    var nom_projet = window.location.host + " - " + $('#search_text').val();
+                    if (json.projects[index].name == nom_projet) {
+                        ligne = json.projects[index];
+                        trouver = true;
+                        break;
+                    }
+                }
+                if (trouver == false) {
+                    ajoutDesUrls(tab_link);
+                } else {
+                    ajoutDesUrlsManquants(tab_link, ligne.id);
+                }
+            } catch (e) {
+                alert("Il y a eu problème lors de l'ajout des urls.")
+            }
+        });
 
     });
 
