@@ -194,24 +194,24 @@ $(function () {
                             nb_total = nb_indexed + nb_non_indexed + nb_attente;
 
                             //Réaffichage des données
-                            $('#nb_indexed').text(nb_indexed);
-                            $('#nb_non_indexed').text(nb_non_indexed);
-                            $('#nb_attente').text(nb_attente);
+                            // $('#nb_indexed').text(nb_indexed);
+                            // $('#nb_non_indexed').text(nb_non_indexed);
+                            // $('#nb_attente').text(nb_attente);
 
-                            if (nb_total > 0) {
-                                //parseFloat((nb_indexed * 100) / nb_total).toFixed(2)
-                                $('#pour_nb_indexed').text(parseFloat((nb_indexed * 100) / nb_total).toFixed(2));
-                                $('#pour_nb_non_indexed').text(parseFloat((nb_non_indexed * 100) / nb_total).toFixed(2));
-                                $('#pour_nb_attente').text(parseFloat((nb_attente * 100) / nb_total).toFixed(2));
-                            } else {
-                                $('#pour_nb_indexed').text(0);
-                                $('#pour_nb_non_indexed').text(0);
-                                $('#pour_nb_attente').text(0);
-                            }
+                            // if (nb_total > 0) {
+                            //     //parseFloat((nb_indexed * 100) / nb_total).toFixed(2)
+                            //     $('#pour_nb_indexed').text(parseFloat((nb_indexed * 100) / nb_total).toFixed(2));
+                            //     $('#pour_nb_non_indexed').text(parseFloat((nb_non_indexed * 100) / nb_total).toFixed(2));
+                            //     $('#pour_nb_attente').text(parseFloat((nb_attente * 100) / nb_total).toFixed(2));
+                            // } else {
+                            //     $('#pour_nb_indexed').text(0);
+                            //     $('#pour_nb_non_indexed').text(0);
+                            //     $('#pour_nb_attente').text(0);
+                            // }
 
-                            $('#fav-load').empty();
-                            $('#fav-load').append('<i class="fa fa-spinner" aria-hidden="true"></i>');
-                            $("#fav-load").attr('class', 'block-fav fa-dark');
+                            //Réaffichage des données
+                            actualiserIndicationRubonPlugin(nb_indexed, nb_non_indexed, nb_attente, nb_total, timebar);
+                            stopload();
 
                             //console.log('nb_indexed');
                             // console.log('Value currently is ' + tokken);
@@ -235,6 +235,7 @@ $(function () {
             }
         } else {
             alert('Veuillez saisir votre clé API sur le plugin Isindexed!');
+            stopload();
         }
     });
 
@@ -355,9 +356,7 @@ $(function () {
         //Envoye de la requête
         if (tab_link.length > 0) {
             //Indication
-            $('#fav-load').empty();
-            $('#fav-load').append('<i class="fa fa-spinner fa-spin fa-3x fa-fw"></i>');
-            $("#fav-load").attr('class', 'block-fav-2 fa-dark');
+            startload();
 
             var tab_urls = [];
             for (var index = 0; index < tab_link.length; index++) {
@@ -390,12 +389,10 @@ $(function () {
                         collecteIsIndexed(json.id, tokken);
                     } catch (e) {
                         //Indication
-                        $('#fav-load').empty();
-                        $('#fav-load').append('<i class="fa fa-spinner fa-spin fa-3x fa-fw"></i>');
-                        $("#fav-load").attr('class', 'block-fav-2 fa-dark');
+                        startload();
                         //Supprimer le message après 5s
                         setTimeout(function () {
-                            $('div#isindexed-div').remove();
+                            startload();
                             ajoutDesUrls(tab_link);
                         }, 5000);
                     }
@@ -408,13 +405,9 @@ $(function () {
         } else {
             //Supprimer le message après 10s
             //Indication
-            $('div#isindexed-div').remove();
-            $("<div id='isindexed-div'>Nous n\'avons pas trouvé de lien!</div>").insertBefore("#js-main-table");
-            $('div#isindexed-div').css({
-                'background-color': '#c82e2e'
-            });
+            startload();
             setTimeout(function () {
-                $('div#isindexed-div').remove();
+                startload();
                 ajoutDesUrls(tab_link);
             }, 10000);
         }
@@ -425,9 +418,7 @@ $(function () {
         //Envoye de la requête
         if (tab_link.length > 0) {
             //Indication
-            $('#fav-load').empty();
-            $('#fav-load').append('<i class="fa fa-spinner fa-spin fa-3x fa-fw"></i>');
-            $("#fav-load").attr('class', 'block-fav-2 fa-dark');
+            startload();
 
             var tab_urls = [];
             for (var index = 0; index < tab_link.length; index++) {
@@ -459,12 +450,11 @@ $(function () {
                         collecteIsIndexed(json.id, tokken);
                     } catch (e) {
                         //Indication
-                        $('#fav-load').empty();
-                        $('#fav-load').append('<i class="fa fa-spinner fa-spin fa-3x fa-fw"></i>');
-                        $("#fav-load").attr('class', 'block-fav-2 fa-dark');
+                        startload();
                         //Supprimer le message après 5s
                         setTimeout(function () {
-                            $('div#isindexed-div').remove();
+                            // $('div#isindexed-div').remove();
+                            startload();
                             ajoutDesUrls(tab_link);
                         }, 5000);
                     }
@@ -491,9 +481,8 @@ $(function () {
 
     function reverifierProjet(id_projet, tokken) {
         //Indication
-        $('#fav-load').empty();
-        $('#fav-load').append('<i class="fa fa-spinner fa-spin fa-3x fa-fw"></i>');
-        $("#fav-load").attr('class', 'block-fav-2 fa-dark');
+        startload();
+
         //Post
         var dataSend = { "vide": "vide" };
         var dataObj = {
@@ -516,9 +505,8 @@ $(function () {
     function collecteIsIndexed(id_projet, tokken) {
 
         //Indication
-        $('#fav-load').empty();
-        $('#fav-load').append('<i class="fa fa-spinner fa-spin fa-3x fa-fw"></i>');
-        $("#fav-load").attr('class', 'block-fav-2 fa-dark');
+        startload();
+
         //Post
         var dataSend = { "vide": "vide" };
         var dataObj = {
@@ -544,9 +532,7 @@ $(function () {
                 } catch (e) {
                     //Refaire après 5 seconds
                     //Indication
-                    $('#fav-load').empty();
-                    $('#fav-load').append('<i class="fa fa-spinner fa-spin fa-3x fa-fw"></i>');
-                    $("#fav-load").attr('class', 'block-fav-2 fa-dark');
+                    startload();
                     //Supprimer le message après 5s
                     setTimeout(function () {
                         collecteIsIndexed(id_projet, tokken);
@@ -571,11 +557,8 @@ $(function () {
     }
 
     function restructurationDuDom(json, id_projet, tokken) {
-        //Supprimer div s'il existe
-        $('#fav-load').empty();
-        $('#fav-load').append('<i class="fa fa-spinner fa-spin fa-3x fa-fw"></i>');
-        $("#fav-load").attr('class', 'block-fav-2 fa-dark');
 
+        startload();
 
         //console.log(json);
         //Tableau réponse
@@ -683,28 +666,9 @@ $(function () {
                         }
                     }
                     //Réaffichage des données
-                    $('#nb_indexed').text(nb_indexed);
-                    $('#nb_non_indexed').text(nb_non_indexed);
-                    $('#nb_attente').text(nb_attente);
+                    actualiserIndicationRubonPlugin(nb_indexed, nb_non_indexed, nb_attente, nb_total, timebar);
 
-                    if (nb_total > 0) {
 
-                        $('#pour_nb_indexed').text(parseFloat((nb_indexed * 100) / nb_total).toFixed(2));
-                        $('#pour_nb_non_indexed').text(parseFloat((nb_non_indexed * 100) / nb_total).toFixed(2));
-                        $('#pour_nb_attente').text(parseFloat((nb_attente * 100) / nb_total).toFixed(2));
-
-                        //Progres bar
-                        var apa = 100 - (nb_attente * 100) / nb_total;
-                        timebar.goto(apa);
-                        $('#affichage-pourcentage-avancement').text(parseFloat(apa).toFixed(2));
-
-                    } else {
-                        $('#pour_nb_indexed').text(0);
-                        $('#pour_nb_non_indexed').text(0);
-                        $('#pour_nb_attente').text(0);
-                        timebar.goto(100);
-                        $('#affichage-pourcentage-avancement').text(100);
-                    }
 
 
                 }
@@ -714,22 +678,16 @@ $(function () {
             //Cookies.set('nampoina', 'miora');
             //Si c'est pas encore fini alors il faut revoir la liste
             //Indication
-            $('#fav-load').empty();
-            $('#fav-load').append('<i class="fa fa-spinner fa-spin fa-3x fa-fw"></i>');
-            $("#fav-load").attr('class', 'block-fav-2 fa-dark');
+            startload();
 
             setTimeout(function () {
                 pasFini = false;
-                $('#fav-load').empty();
-                $('#fav-load').append('<i class="fa fa-spinner fa-spin fa-3x fa-fw"></i>');
-                $("#fav-load").attr('class', 'block-fav-2 fa-dark');
+                startload();
                 collecteIsIndexed(id_projet, tokken);
             }, 10000);
         } else {
             //Indication
-            $('#fav-load').empty();
-            $('#fav-load').append('<i class="fa fa-spinner" aria-hidden="true"></i>');
-            $("#fav-load").attr('class', 'block-fav fa-dark');
+            stopload();
 
             //console.log('ici');
 
@@ -745,8 +703,49 @@ $(function () {
         return n < 10 ? '0' + n : n
     }
 
+    function startload() {
+        //Indication
+        $('#fav-load').empty();
+        $('#fav-load').append('<i class="fa fa-spinner fa-spin fa-3x fa-fw"></i>');
+        $("#fav-load").attr('class', 'block-fav-2 fa-dark');
+    }
+
+    function stopload() {
+        //Indication
+        $('#fav-load').empty();
+        $('#fav-load').append('<i class="fa fa-spinner" aria-hidden="true"></i>');
+        $("#fav-load").attr('class', 'block-fav fa-dark');
+    }
+
+    function actualiserIndicationRubonPlugin(nb_indexed, nb_non_indexed, nb_attente, nb_total, timebar) {
+        $('#nb_indexed').text(nb_indexed);
+        $('#nb_non_indexed').text(nb_non_indexed);
+        $('#nb_attente').text(nb_attente);
+
+        if (nb_total > 0) {
+
+            $('#pour_nb_indexed').text(parseFloat((nb_indexed * 100) / nb_total).toFixed(2));
+            $('#pour_nb_non_indexed').text(parseFloat((nb_non_indexed * 100) / nb_total).toFixed(2));
+            $('#pour_nb_attente').text(parseFloat((nb_attente * 100) / nb_total).toFixed(2));
+
+            //Progres bar
+            var apa = 100 - (nb_attente * 100) / nb_total;
+            timebar.goto(apa);
+            $('#affichage-pourcentage-avancement').text(parseFloat(apa).toFixed(2));
+
+        } else {
+            $('#pour_nb_indexed').text(0);
+            $('#pour_nb_non_indexed').text(0);
+            $('#pour_nb_attente').text(0);
+            timebar.goto(100);
+            $('#affichage-pourcentage-avancement').text(100);
+        }
+    }
+
     //Event
     $(document).on('click', '#ajouter', function (e) {
+
+        startload();
 
         //Ajout nouveau projet ou ajout nouveaux urls dans le projet
         var tab_link = recuperationDesLiens();
@@ -775,12 +774,16 @@ $(function () {
                 }
             } catch (e) {
                 alert("Il y a eu problème lors de l'ajout des urls.")
+            } finally {
+                stopload();
             }
         });
 
     });
 
     $(document).on('click', '#raffraichir', function (e) {
+
+        startload();
 
         //Raffraichir la page selon le projet enregistrer
         var tab_link = recuperationDesLiens();
@@ -812,11 +815,15 @@ $(function () {
                 }
             } catch (e) {
                 alert("Il y a eu problème lors de l'ajout des urls.")
+            } finally {
+                stopload();
             }
         });
     });
 
     $(document).on('click', '#reverifier', function (e) {
+
+        startload();
 
         //Revérifier les urls du projet qui sont enregistrés
         var promise = voirSiProjetExisteAvantAjout(tokken);
@@ -859,6 +866,8 @@ $(function () {
                 }
             } catch (e) {
                 alert("Il y a eu problème lors de la vérification!")
+            } finally {
+                stopload();
             }
         });
     });
