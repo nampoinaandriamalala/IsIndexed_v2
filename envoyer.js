@@ -199,9 +199,10 @@ $(function () {
                             $('#nb_attente').text(nb_attente);
 
                             if (nb_total > 0) {
-                                $('#pour_nb_indexed').text((nb_indexed * 100) / nb_total);
-                                $('#pour_nb_non_indexed').text((nb_non_indexed * 100) / nb_total);
-                                $('#pour_nb_attente').text((nb_attente * 100) / nb_total);
+                                //parseFloat((nb_indexed * 100) / nb_total).toFixed(2)
+                                $('#pour_nb_indexed').text(parseFloat((nb_indexed * 100) / nb_total).toFixed(2));
+                                $('#pour_nb_non_indexed').text(parseFloat((nb_non_indexed * 100) / nb_total).toFixed(2));
+                                $('#pour_nb_attente').text(parseFloat((nb_attente * 100) / nb_total).toFixed(2));
                             } else {
                                 $('#pour_nb_indexed').text(0);
                                 $('#pour_nb_non_indexed').text(0);
@@ -488,7 +489,7 @@ $(function () {
         }
     }
 
-    function reverifierProjet(id_projet,tokken) {
+    function reverifierProjet(id_projet, tokken) {
         //Indication
         $('#fav-load').empty();
         $('#fav-load').append('<i class="fa fa-spinner fa-spin fa-3x fa-fw"></i>');
@@ -496,11 +497,12 @@ $(function () {
         //Post
         var dataSend = { "vide": "vide" };
         var dataObj = {
-            url: 'https://tool.isindexed.com/api/v1/project/'+id_projet+'/check/all',
+            url: 'https://tool.isindexed.com/api/v1/project/' + id_projet + '/check/all',
             authorization: tokken,
-            data: JSON.stringify(dataSend)
+            data: JSON.stringify(dataSend),
+            post: 1
         }
-        $.ajax({
+        return $.ajax({
             url: "https://captureserp.com/isindexed/action.php",
             type: "POST",
             dataType: "json",
@@ -686,14 +688,15 @@ $(function () {
                     $('#nb_attente').text(nb_attente);
 
                     if (nb_total > 0) {
-                        $('#pour_nb_indexed').text((nb_indexed * 100) / nb_total);
-                        $('#pour_nb_non_indexed').text((nb_non_indexed * 100) / nb_total);
-                        $('#pour_nb_attente').text((nb_attente * 100) / nb_total);
+
+                        $('#pour_nb_indexed').text(parseFloat((nb_indexed * 100) / nb_total).toFixed(2));
+                        $('#pour_nb_non_indexed').text(parseFloat((nb_non_indexed * 100) / nb_total).toFixed(2));
+                        $('#pour_nb_attente').text(parseFloat((nb_attente * 100) / nb_total).toFixed(2));
 
                         //Progres bar
                         var apa = 100 - (nb_attente * 100) / nb_total;
                         timebar.goto(apa);
-                        $('#affichage-pourcentage-avancement').text(apa);
+                        $('#affichage-pourcentage-avancement').text(parseFloat(apa).toFixed(2));
 
                     } else {
                         $('#pour_nb_indexed').text(0);
@@ -840,11 +843,19 @@ $(function () {
                     alert("Le projet [" + nom_projet + "] n'existe pas encore!");
                 } else {
                     var promise2 = reverifierProjet(ligne.id, tokken);
-                    promise2.success(function(datax){
+                    promise2.success(function (datax) {
+                        //Vérifier si le projet existe
+                        try {
+                            var jsonx = JSON.parse(datax);
+                            //Affichage des données
+                            collecteIsIndexed(jsonx.id, tokken);
+
+                        } catch (e) {
+                            alert("Il y a eu problème lors de la vérification!")
+                        }
                         console.log(datax);
                     });
-                    //Affichage des données
-                    //collecteIsIndexed(ligne.id, tokken);
+
                 }
             } catch (e) {
                 alert("Il y a eu problème lors de la vérification!")
