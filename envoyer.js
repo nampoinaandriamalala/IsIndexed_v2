@@ -839,7 +839,7 @@ $(function () {
                     var nom_projet = window.location.host + " - " + $('#search_text').val();
                     alert("Le projet [" + nom_projet + "] n'existe pas encore!");
                 } else {
-                    promise2 = reverifierProjet(ligne.id, tokken);
+                    var promise2 = reverifierProjet(ligne.id, tokken);
                     promise2.success(function(datax){
                         console.log(datax);
                     });
