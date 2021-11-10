@@ -163,17 +163,17 @@ $(function () {
                                                         switch (datas_json[a].s) {
                                                             case "0":
                                                                 supprimerElementsByClass(linkType, 'indexe-supprimer');
-                                                                linkType.innerHTML += '<span class="indexe-supprimer indexe-blanc link-type-button">En attente</span>';
+                                                                linkType.innerHTML += '<span class="indexe-supprimer indexe-blanc link-type-button"><i class="fa fa-refresh" aria-hidden="true"></i> En attente</span>';
                                                                 nb_attente++;
                                                                 break;
                                                             case "1":
                                                                 supprimerElementsByClass(linkType, 'indexe-supprimer');
-                                                                linkType.innerHTML += '<span class="indexe-supprimer indexe-vert link-type-button">Indexé</span>';
+                                                                linkType.innerHTML += '<span class="indexe-supprimer indexe-vert link-type-button"><i class="fa fa-check" aria-hidden="true"></i> Indexé</span>';
                                                                 nb_indexed++;
                                                                 break;
                                                             case "2":
                                                                 supprimerElementsByClass(linkType, 'indexe-supprimer');
-                                                                linkType.innerHTML += '<span class="indexe-supprimer indexe-rouge link-type-button">Non indexé</span>';
+                                                                linkType.innerHTML += '<span class="indexe-supprimer indexe-rouge link-type-button"><i class="fa fa-times" aria-hidden="true"></i> Non indexé</span>';
                                                                 nb_non_indexed++;
                                                                 break;
                                                             default:
@@ -633,20 +633,20 @@ $(function () {
                                 switch (tab_reponse[a].status) {
                                     case "0":
                                         supprimerElementsByClass(linkType, 'indexe-supprimer');
-                                        linkType.innerHTML += '<span class="indexe-supprimer indexe-blanc link-type-button">En attente</span>';
+                                        linkType.innerHTML += '<span class="indexe-supprimer indexe-blanc link-type-button"><i class="fa fa-refresh" aria-hidden="true"></i> En attente</span>';
                                         pasFini = true;
                                         nb_attente++;
                                         break;
                                     case "1":
                                         supprimerElementsByClass(linkType, 'indexe-supprimer');
-                                        linkType.innerHTML += '<span class="indexe-supprimer indexe-vert link-type-button">Indexé</span>';
+                                        linkType.innerHTML += '<span class="indexe-supprimer indexe-vert link-type-button"><i class="fa fa-check" aria-hidden="true"></i> Indexé</span>';
                                         total_fini++;
                                         total_indexe++;
                                         nb_indexed++;
                                         break;
                                     case "2":
                                         supprimerElementsByClass(linkType, 'indexe-supprimer');
-                                        linkType.innerHTML += '<span class="indexe-supprimer indexe-rouge link-type-button">Non indexé</span>';
+                                        linkType.innerHTML += '<span class="indexe-supprimer indexe-rouge link-type-button"><i class="fa fa-times" aria-hidden="true"></i> Non indexé</span>';
                                         total_fini++;
                                         total_non_indexe++;
                                         nb_non_indexed++
